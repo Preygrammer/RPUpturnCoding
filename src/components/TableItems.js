@@ -1,42 +1,75 @@
 import { useEffect } from "react";
+import { bindActionCreators } from "redux";
 import { connect, useDispatch } from "react-redux";
 import { fetchProblems } from "../actions";
+import { Link } from "react-router-dom";
 
-function TableItems() {
+function TableItems({problems}) {
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(()=> {
     dispatch(fetchProblems());
   }, [dispatch]);
 
+  if(!problems) {
+    return (
+      <tr key="0">
+        <td>Loading problems...</td>
+      </tr>
+    )
+  }
+
   return (
     <>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Title</th>
-          <th>Tags</th>
-          <th>Acceptance</th>
-          <th>Difficulty</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td></td>
-          <td>Joins Two Strings</td>
-          <td>strings</td>
-          <td>94%</td>
-          <td>Easiest</td>
-        </tr>
-      </tbody>
-    </>
+      {
+        problems && problems.map((problem) => {
+          return (
+            <tr key={problem.sort}>
+              <td></td>
+                <td>
+                <Link
+                  to={{
+                    pathname: `/problems/${problem.id}`
+                  }}
+                >
+                  {problem.title}
+                </Link>
+                 
+                  </td>
+                <td>
+                  <div className="tags">
+                  {
+                    problem.tags.map((tag) => {
+                      return (
+                         <div className="tag">
+                            {tag}
+                          </div>
+                      )
+                    })
+                  }
+                  </div>
+                  </td>
+                <td>{problem.acceptance}</td>
+                <td><div className="tag tag-difficulty">{problem.difficulty}</div></td>
+             </tr>
+          )
+        })
+      }
+      </>
   );
+
 }
 
 function mapStateToProps(state) {
+  console.log(state)
   return {
     problems: state.problems
   };
 }
+
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ fetchProblems: fetchProblems }, dispatch);
+// }
 
 export default connect(mapStateToProps)(TableItems);

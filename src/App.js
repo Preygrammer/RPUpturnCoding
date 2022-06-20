@@ -1,26 +1,26 @@
-import BodyHeader from "./components/BodyHeader";
-import Card from "./components/Card";
-import Navbar from "./components/Navbar";
-import Table from "./containers/Table";
-import "./styles.scss";
+import AlgorithmsPage from "./pages/AlgorithmsPage";
+import ProblemsPage from "./pages/ProblemPage"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
+
+import "./assets/scss/styles.scss";
 
 export default function App() {
   return (
-    <div className="App dark-mode">
-      <Navbar />
-      <div className="container">
-        <BodyHeader />
-
-        <div className="board">
-          <div className="board-content">
-            <Table />
-          </div>
-
-          <div className="board-status">
-            <Card />
-          </div>
-        </div>
+    <Router>
+      <div className="App dark-mode">
+          <Routes>
+            <Route exact path="/problems" element={<AlgorithmsPage />} />
+            <Route
+              exact
+              path="/problems/:id"
+              element={<ProblemsPage />}
+            />
+          </Routes>
       </div>
-    </div>
+    </Router>
   );
 }

@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
-import problemReducers from "./problemReducers";
+import ProblemReducers from "./problemReducers";
 
 const rootReducer = combineReducers({
-  contents: [],
-  problems: problemReducers
+  problems: ProblemReducers
 });
 
 export default rootReducer;

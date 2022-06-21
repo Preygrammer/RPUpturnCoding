@@ -1,0 +1,85 @@
+ @import '../styles';
+ 
+ .App.dark-mode {
+    height: 90vh;
+    // Split Pane
+    .problems {
+        color: white;
+        height: 100%;
+    }
+    
+    .split-pane-container > div {
+    
+        &:nth-child(1) {
+            background-color: $four;
+            padding: 10px 20px;
+            height: auto;
+            min-width: 500px !important;
+        }
+    }
+
+    // Tab
+    .tab {
+        color: $one;
+        font-size: 14px;
+        &-parent {
+            display: flex;
+            border-bottom: 1px solid #dbdbdb;
+        }
+
+        &-child {
+            align-items: center;
+            color: #4a4a4a;
+            display: flex;
+            justify-content: center;
+            margin-bottom: -1px;
+            padding: .5em 1em 1em;
+            vertical-align: top;
+            a {
+               text-decoration: none; 
+            }
+
+            &.active {
+                border-bottom: 1px solid $one;
+            }
+        }
+    }
+
+    // Problem Details
+    .problem-details {
+        color: $one;
+    }
+
+    .problems {
+
+        &-back {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        &-back a {
+            border-color: #dbdbdb;
+            border-width: 1px;
+            color: $four;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.75em;
+            text-align: center;
+            white-space: nowrap;
+            font-size: 24px;
+
+            &:hover {
+                border-color: $two;
+            }
+        }
+
+        &-split-right {
+            height: 100%;
+            background-color: #282c34;
+        }
+    }
+
+ }

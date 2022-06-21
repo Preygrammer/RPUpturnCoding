@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { Fragment } from "react";
 import { createRoot } from "react-dom/client";
 
 import { Provider } from "react-redux";
@@ -16,8 +16,8 @@ const root = createRoot(rootElement);
 
 root.render(
   <Provider store={store}>
-    <StrictMode>
+    <Fragment>
       <App />
-    </StrictMode>
+    </Fragment>
   </Provider>
 );

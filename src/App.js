@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import "./assets/scss/styles.scss";
+import "./assets/scss/pages/_algorithms-page.scss";
 
 export default function App() {
   return (

@@ -23,15 +23,16 @@ function TableItems({problems}) {
   return (
     <>
       {
-        problems && problems.map((problem) => {
+        problems && problems.map((problem, index) => {
           return (
             <tr key={problem.sort}>
               <td></td>
                 <td>
                 <Link
                   to={{
-                    pathname: `/problems/${problem.id}`
+                    pathname: `/problems/${problem.id}`,
                   }}
+                  state={{ problem }}
                 >
                   {problem.title}
                 </Link>
@@ -62,7 +63,6 @@ function TableItems({problems}) {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     problems: state.problems
   };

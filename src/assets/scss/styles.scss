@@ -6,6 +6,7 @@ $three: #00ce43;
 $four: #fbf2ed;
 $five: #fd0122;
 $white: #fff;
+$borderColor: #dbdbdb;
 
 // fonts
 $title: 34px;
@@ -34,6 +35,61 @@ pre {
     padding: 1.25rem 1.5rem;
     white-space: pre;
     word-wrap: normal;
+}
+
+a.disabled-link {
+  opacity: .5;
+  box-shadow: none !important;
+  pointer-events: none;
+  &:hover {
+    cursor: not-allowed !important;
+  }
+}
+
+button[disabled] {
+  opacity: .5;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 10px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid #383636; /* Blue */
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+.spinner-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.isLoading {
+  position: relative;
+  opacity: 0.5;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #383636;
+    border-radius: 50%;
+    animation: spinner 1.5s linear infinite;
+  }
 }
 
 

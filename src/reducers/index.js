@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
-import ProblemReducers from "./problemReducers";
+import ProblemReducers, { submitCode } from "./problemReducers";
 
 const rootReducer = combineReducers({
-  problems: ProblemReducers
+  problems: ProblemReducers,
+  codeSubmittedStatus: submitCode,
 });
 
 export default rootReducer;

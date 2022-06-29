@@ -92,6 +92,13 @@
     border-collapse: collapse;
     border-spacing: 0;
   }
+
+  .problem-item {
+    text-decoration: none;
+    &:hover {
+      color: $three;
+    }
+  } 
   
   // Table
   .table {
@@ -109,14 +116,12 @@
     }
   
     th, td {
-      border: solid #dbdbdb;
+      border: solid $borderColor;
       border-width: 0 0 1px;
       padding: 0.5em 0.75em;
       vertical-align: top;
     }
-  
-    
-  
+
     .tag {
       display: inline-block;
       font-weight: 300;

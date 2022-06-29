@@ -1,7 +1,7 @@
  @import '../styles';
  
  .App.dark-mode {
-    height: 90vh;
+    height: 94vh;
     // Split Pane
     .problems {
         color: white;
@@ -16,6 +16,10 @@
             height: auto;
             min-width: 500px !important;
         }
+
+        &:nth-child(3) {
+            min-width: 500px !important;
+        }
     }
 
     // Tab
@@ -24,7 +28,7 @@
         font-size: 14px;
         &-parent {
             display: flex;
-            border-bottom: 1px solid #dbdbdb;
+            border-bottom: 1px solid $borderColor;
         }
 
         &-child {
@@ -50,8 +54,11 @@
         color: $one;
     }
 
-    .problems {
+    .requirement-item {
+        font-size: 14px;
+    }
 
+    .problems {
         &-back {
             margin: 15px 0;
             display: flex;
@@ -59,7 +66,7 @@
         }
 
         &-back a {
-            border-color: #dbdbdb;
+            border-color: $borderColor;
             border-width: 1px;
             color: $four;
             cursor: pointer;
@@ -76,10 +83,79 @@
             }
         }
 
+        &-split-left {
+            position: relative;
+            height: 100%;
+        }
+
         &-split-right {
+            font-size: 16px;
             height: 100%;
             background-color: #282c34;
         }
+    }
+
+    // Problem details footer
+    .problem-details-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        border-top: 1px solid $borderColor;
+        padding-top: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .btn-navigation-parent.disabled-link {
+        cursor: not-allowed;
+    }
+
+    // Problem details footer buttons
+    .btn-previous, .btn-next {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        color: $one;
+        cursor: pointer;
+        padding: .75em .75em;
+        background-color: $four;
+        border-radius: 5px;
+        border: 1px solid $borderColor;
+        text-decoration: none;
+    }
+    
+    // Code mirror footer
+    .form-code {
+        position: relative;
+        height: 100%;
+    }
+
+    .code-mirror-footer {
+        width: 100%;
+        background-color: $four;
+        padding: .75em .50em;
+        position: absolute;
+        bottom: 0;
+    }
+
+    .btn-submit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: $four;
+        cursor: pointer;
+        padding: .75em .50em;
+        background-color: $two;
+        width: 100%;
+        border: none;
+    }
+
+    .btn-submit svg {
+        font-size: 26px;
+        margin-top: -2px;
     }
 
  }

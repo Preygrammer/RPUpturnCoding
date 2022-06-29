@@ -1,14 +1,29 @@
-import { useEffect } from "react";
-import { bindActionCreators } from "redux";
-import { connect, useDispatch } from "react-redux";
+import parseHTML from "html-react-parser";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default function ProblemDetails({ details }) {
-  console.log(details);
+function ProblemDetails({ details }) {
+  console.log("Details", details);
+  if (details === null) {
+    return <div>Loading data...</div>;
+  }
 
-  const { id, title, description, requirements, examples } = details.problem;
+  // extract the object problem
+  const { id, title, description, requirements, examples, prevId, nextId } =
+    details[0];
+
+  const hasPrevious =
+    prevId === null || prevId === "null" ? "disabled-link" : "";
+
+  const hasNext = nextId === null || nextId === "null" ? "disabled-link" : "";
 
   const requirementItems = requirements.map((item, index) => {
-    return <li key={index}>{item}</li>;
+    return (
+      <li className="requirement-item" key={index}>
+        {item}
+      </li>
+    );
   });
 
   const examplesItems = examples.map((example, index) => {
@@ -30,7 +45,7 @@ export default function ProblemDetails({ details }) {
     <div className="problem-details">
       <div className="problem-details-title">
         <h4>{title}</h4>
-        <p className="problem-details-description">{description}</p>
+        <p className="problem-details-description">{parseHTML(description)}</p>
       </div>
       <div className="problem-details-requirements">
         <h3>Requirements</h3>
@@ -39,6 +54,39 @@ export default function ProblemDetails({ details }) {
       </div>
 
       <div className="problem-details-examples">{examplesItems}</div>
+
+      <div className="problem-details-footer">
+        <div className={`btn-navigation-parent ${hasPrevious}`}>
+          <Link
+            className={`btn-previous ${hasPrevious}`}
+            to={{
+              pathname: `/problems/${prevId}`,
+            }}
+          >
+            Previous
+          </Link>
+        </div>
+
+        <div className={`btn-navigation-parent ${hasNext}`}>
+          <Link
+            className={`btn-next ${hasNext}`}
+            to={{
+              pathname: `/problems/${nextId}`,
+            }}
+          >
+            Next
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
+
+function mapStateToProps(state) {
+  console.log("State ", state);
+  return {
+    details: state.problems,
+  };
+}
+
+export default connect(mapStateToProps)(ProblemDetails);

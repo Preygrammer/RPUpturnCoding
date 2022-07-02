@@ -1,16 +1,22 @@
-import { createReducer } from "@reduxjs/toolkit";
-import { GET_PROBLEMS, GET_PROBLEM_BY_ID, SUBMIT_CODE } from "../actions";
+import {
+  GET_PROBLEMS,
+  GET_PROBLEM_BY_ID,
+  SUBMIT_CODE,
+} from "../constants/actionTypes";
 
-export default function getProblems(state = null, action) {
+const initialState = {
+  problems: [],
+  currentProblem: [],
+};
+
+export default function getProblems(state = initialState, action) {
   switch (action.type) {
     case GET_PROBLEMS:
-      return action.payload.data;
+      const problems = action.payload.data;
+      return { ...state, problems };
     case GET_PROBLEM_BY_ID:
-      // console.log(action.payload.data);
-      return [action.payload.data];
-    // case SET_PREVIOUS_PROBLEM_ID:
-    //   console.log(action.payload);
-    //   return [action.payload];
+      const currentProblem = action.payload.data;
+      return { ...state, currentProblem };
     default:
       return state;
   }
@@ -19,7 +25,7 @@ export default function getProblems(state = null, action) {
 export function submitCode(state = null, action) {
   switch (action.type) {
     case SUBMIT_CODE:
-      console.log("Code submitted ", action.payload.data);
+      console.log(action.payload);
       return action.payload.data;
     default:
       return state;

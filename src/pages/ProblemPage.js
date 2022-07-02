@@ -59,12 +59,12 @@ function ProblemPage({ problem }) {
         <SplitPane className="split-pane-container">
           <div className="problems-split-left">
             <Tab />
-            <ProblemDetails details={{ problem: problem }} />
+            <ProblemDetails />
           </div>
           <div className="problems-split-right">
             <ProblemCodeMirror
-              codeValue={js_beautify(((problem && problem[0]) || {})["code"])}
-              currentProblemId={((problem && problem[0]) || {})["id"]}
+            // codeValue={js_beautify(((problem && problem) || {})["code"])}
+            // currentProblemId={((problem && problem) || {})["id"]}
             />
           </div>
         </SplitPane>
@@ -75,7 +75,7 @@ function ProblemPage({ problem }) {
 
 function mapStateToProps(state) {
   return {
-    problem: state.problems,
+    problem: state.problems.currentProblem,
   };
 }
 

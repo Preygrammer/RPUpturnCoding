@@ -1,17 +1,15 @@
 import parseHTML from "html-react-parser";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 function ProblemDetails({ details }) {
-  console.log("Details", details);
-  if (details === null) {
+  if (details === null || details.length === 0) {
     return <div>Loading data...</div>;
   }
 
   // extract the object problem
   const { id, title, description, requirements, examples, prevId, nextId } =
-    details[0];
+    details;
 
   const hasPrevious =
     prevId === null || prevId === "null" ? "disabled-link" : "";
@@ -83,9 +81,8 @@ function ProblemDetails({ details }) {
 }
 
 function mapStateToProps(state) {
-  console.log("State ", state);
   return {
-    details: state.problems,
+    details: state.problems.currentProblem,
   };
 }
 

@@ -1,0 +1,37 @@
+$primary: #00966b;
+$white: #fff;
+
+.card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    height: 100px;
+
+    &-icon {
+        display: flex;
+        align-items:center;
+        height: 100%;
+        background-color: $primary;
+        color: $white;
+        font-size: 34px;
+        padding: 10px 25px;
+    }
+
+    &-content {
+        height: 100%;
+        width: 100%;
+        place-items: end;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 20px;
+
+        &-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        &-count {
+            color: $primary;
+        }
+    }
+}

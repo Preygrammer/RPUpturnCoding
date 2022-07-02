@@ -2,18 +2,40 @@ import AlgorithmsPage from "./pages/AlgorithmsPage";
 import ProblemsPage from "./pages/ProblemPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// import AlertTemplate from "react-alert-template-basic";
-
 import "./assets/scss/styles.scss";
 import "./assets/scss/pages/_algorithms-page.scss";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import { wrappedComponents } from "./components/index";
 
 export default function App() {
   return (
     <Router>
       <div className="App dark-mode">
         <Routes>
-          <Route exact path="/problems" element={<AlgorithmsPage />} />
-          <Route exact path="/problems/:id" element={<ProblemsPage />} />
+          {/* <Route exact path="/" element={<AlgorithmsPage />} /> */}
+          <Route
+            exact
+            path="/"
+            element={<wrappedComponents.ProtectedAlgorithmsPage />}
+          />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<Signup />} />
+          <Route
+            exact
+            path="/logout"
+            element={<wrappedComponents.AuthenticatedLogout />}
+          />
+          <Route
+            exact
+            path="/problems"
+            element={<wrappedComponents.ProtectedAlgorithmsPage />}
+          />
+          <Route
+            exact
+            path="/problems/:id"
+            element={<wrappedComponents.ProtectedProblemPage />}
+          />
         </Routes>
       </div>
     </Router>

@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import TableItems from "../components/TableItems";
 
 export default function Table() {
+  const currentState = useSelector((state) => state);
   return (
     <table className="table">
       <thead>
@@ -15,7 +17,6 @@ export default function Table() {
       <tbody>
         <TableItems />
       </tbody>
-      
     </table>
   );
 }

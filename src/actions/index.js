@@ -1,13 +1,21 @@
 import axios from "axios";
+import {
+  GET_PROBLEMS,
+  GET_PROBLEM_BY_ID,
+  SUBMIT_CODE,
+  URL,
+} from "../constants/actionTypes";
+export {
+  signupUser,
+  loginUser,
+  logoutUser,
+  checkCurrentUserAuth,
+} from "./auth";
 
-export const GET_PROBLEMS = "GET_PROBLEMS";
-export const GET_PROBLEM_BY_ID = "GET_PROBLEM_BY_ID";
-export const SUBMIT_CODE = "SUBMIT_CODE";
-
-const url = "http://localhost:7000/problems";
+const fullUrl = `${URL}/problems`;
 
 export function fetchProblems() {
-  const request = axios.get(url);
+  const request = axios.get(fullUrl);
   return {
     type: GET_PROBLEMS,
     payload: request,
@@ -15,7 +23,7 @@ export function fetchProblems() {
 }
 
 export function getProblemById(id) {
-  const request = axios.post(url, {
+  const request = axios.post(fullUrl, {
     id: id,
   });
 
@@ -39,20 +47,40 @@ export function setNextProblemId(problem) {
   };
 }
 
+// // POST
+// export function submitCode(code, currentProblemId) {
+//   if (code === null || code === undefined) {
+//     return {};
+//   }
+
+//   // code = eval(code);
+//   const request = axios.post(`${fullUrl}/checkCode`, {
+//     code: code,
+//     currentProblemId: currentProblemId,
+//   });
+
+//   return {
+//     type: SUBMIT_CODE,
+//     payload: request,
+//   };
+// }
+
 // POST
-export function submitCode(code, currentProblemId) {
-  if (code === null || code === undefined) {
-    return {};
-  }
-
-  // code = eval(code);
-  const request = axios.post(`${url}/checkCode`, {
-    code: code,
-    currentProblemId: currentProblemId,
-  });
-
-  return {
-    type: SUBMIT_CODE,
-    payload: request,
+export const submitCode = (code, currentProblemId) => {
+  return (dispatch) => {
+    return axios
+      .post(`${fullUrl}/checkCode`, {
+        code: code,
+        currentProblemId: currentProblemId,
+      })
+      .then((response) => {
+        const isCorrect = response.data;
+        if (isCorrect) {
+          dispatch({
+            type: SUBMIT_CODE,
+            payload: response,
+          });
+        }
+      });
   };
-}
+};

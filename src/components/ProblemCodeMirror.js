@@ -1,10 +1,11 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { connect, useDispatch } from "react-redux";
-import CodeMirror from "@uiw/react-codemirror";
 import { submitCode } from "../actions";
 import { javascript } from "@codemirror/lang-javascript";
 import { MdPlayArrow } from "react-icons/md";
-import { useAlert, transitions, positions, types } from "react-alert";
+import { useAlert, types } from "react-alert";
+import js_beautify from "js-beautify";
+import CodeMirror from "@uiw/react-codemirror";
 
 function ProblemCodeMirror({
   codeValue,
@@ -13,37 +14,48 @@ function ProblemCodeMirror({
 }) {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const btnSubmitRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
-
   const [code, setCode] = useState("");
-
-  const onChange = (codeValue) => {
-    setCode(codeValue);
+  const [submittedStatus, setSubmittedStatus] = useState(false);
+  const onChange = (valueOfCode) => {
+    setCode(valueOfCode);
   };
 
+  const currentProblemStorage = localStorage.getItem(
+    `_prob:${currentProblemId}`
+  );
+
   useEffect(() => {
+    if (currentProblemStorage) {
+      // has submitted and stored
+      setSubmittedStatus(true);
+      setCode(currentProblemStorage);
+    } else if (!code && !codeSubmittedStatus) {
+      // code is empty and didn't submit yet
+      setCode(codeValue);
+      setSubmittedStatus(false);
+    }
+
     if (!codeSubmittedStatus && codeSubmittedStatus !== null) {
       alert.show("Oops! Error, Please review your code.", {
         type: types.ERROR,
-        onClose: () => {
-          console.log("closed");
-        },
       });
       setIsLoading(false);
       // I use `else if` instead of `else` because codeSubmittedStatus
       // is null when first load and will fall into the `else`
-    } else if (codeSubmittedStatus) {
+    } else if (codeSubmittedStatus && !currentProblemStorage) {
+      // submitted and not yet stored
       alert.show("Your submitted code is correct.", {
         type: types.SUCCESS,
-        onClose: () => {
-          console.log("closed");
-        },
       });
+
+      localStorage.setItem(`_prob:${currentProblemId}`, code);
+
+      setCode(code);
+      setSubmittedStatus(true);
       setIsLoading(false);
     }
-    setIsLoading(false);
-  }, [codeSubmittedStatus]);
+  }, [codeSubmittedStatus, codeValue]);
 
   const codeSet = _.debounce((value) => onChange(value), 100);
 
@@ -56,7 +68,7 @@ function ProblemCodeMirror({
   return (
     <form onSubmit={handleSubmitCode} className="form-code">
       <CodeMirror
-        value={codeValue}
+        value={js_beautify(code)}
         theme="dark"
         extensions={[javascript()]}
         onChange={codeSet}
@@ -64,21 +76,25 @@ function ProblemCodeMirror({
       <div className="code-mirror-footer">
         <button
           className={`btn-submit ${isLoading ? "isLoading" : ""}`}
-          disabled={isLoading || codeSubmittedStatus}
-          ref={btnSubmitRef}
+          disabled={isLoading || submittedStatus}
         >
           <MdPlayArrow />
-          {codeSubmittedStatus ? "Submitted" : "Run and Submit"}
+          {submittedStatus ? "Submitted" : "Run and Submit"}
         </button>
       </div>
     </form>
   );
 }
 
-function mapStateToProps({ codeSubmittedStatus }) {
+const mapStateToProps = ({
+  codeSubmittedStatus,
+  problems: { currentProblem },
+}) => {
   return {
     codeSubmittedStatus,
+    codeValue: currentProblem.code,
+    currentProblemId: currentProblem.id,
   };
-}
+};
 
 export default connect(mapStateToProps)(ProblemCodeMirror);

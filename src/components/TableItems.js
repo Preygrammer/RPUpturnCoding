@@ -49,7 +49,7 @@ function TableItems({ problems }) {
       {problems &&
         problems.map((problem, index) => {
           return (
-            <tr key={problem.sort}>
+            <tr key={index}>
               <td></td>
               <td>
                 <Link
@@ -72,7 +72,11 @@ function TableItems({ problems }) {
               <td>
                 <div className="tags">
                   {problem.tags.map((tag) => {
-                    return <div className="tag">{tag}</div>;
+                    return (
+                      <div key={tag} className="tag">
+                        {tag}
+                      </div>
+                    );
                   })}
                 </div>
               </td>
@@ -87,10 +91,10 @@ function TableItems({ problems }) {
   );
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = ({ problems: { problems } }) => {
   return {
-    problems: state.problems,
+    problems,
   };
-}
+};
 
 export default connect(mapStateToProps)(TableItems);

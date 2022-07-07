@@ -2,6 +2,7 @@ import {
   GET_PROBLEMS,
   GET_PROBLEM_BY_ID,
   SUBMIT_CODE,
+  SET_SUBMIT_CODE_DEFAULT,
 } from "../constants/actionTypes";
 
 const initialState = {
@@ -22,11 +23,13 @@ export default function getProblems(state = initialState, action) {
   }
 }
 
-export function submitCode(state = null, action) {
+export function submitCode(state = false, action) {
   switch (action.type) {
     case SUBMIT_CODE:
       console.log(action.payload);
       return action.payload.data;
+    case SET_SUBMIT_CODE_DEFAULT:
+      return (state = false);
     default:
       return state;
   }

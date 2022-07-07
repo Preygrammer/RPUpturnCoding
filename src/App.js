@@ -1,5 +1,5 @@
 import AlgorithmsPage from "./pages/AlgorithmsPage";
-import ProblemsPage from "./pages/ProblemPage";
+import Submissions from "./components/Submissions";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./assets/scss/styles.scss";
@@ -35,7 +35,9 @@ export default function App() {
             exact
             path="/problems/:id"
             element={<wrappedComponents.ProtectedProblemPage />}
-          />
+          >
+            <Route exact path="submissions" element={<Submissions />}></Route>
+          </Route>
         </Routes>
       </div>
     </Router>

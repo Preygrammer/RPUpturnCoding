@@ -4,12 +4,11 @@ import Tab from "../components/Tab";
 import ProblemDetails from "../components/ProblemDetails";
 import ProblemCodeMirror from "../components/ProblemCodeMirror";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
 import { connect, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getProblemById } from "../actions";
-import js_beautify from "js-beautify";
 import _arrayPropGetter from "../utils/array_property_getter";
 import "../assets/scss/pages/_problem-page.scss";
 import {
@@ -22,6 +21,10 @@ import AlertTemplate from "react-alert-template-basic";
 
 function ProblemPage({ problem }) {
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  console.log(location);
+
   // optional configuration
   const options = {
     // you can also just use 'bottom center'
@@ -60,6 +63,7 @@ function ProblemPage({ problem }) {
           <div className="problems-split-left">
             <Tab />
             <ProblemDetails />
+            <Outlet />
           </div>
           <div className="problems-split-right">
             <ProblemCodeMirror

@@ -36,7 +36,6 @@ export default function authorization(state = initialState, action) {
     case AUTH_CHECK_USER:
       return { ...state, authChecked: true, loggedIn: true };
     default:
-      console.log("DEFAULT");
       return state;
   }
 }

@@ -24,16 +24,16 @@ function ProblemDetails({ details }) {
     );
   });
 
-  const examplesItems = examples.map((example, index) => {
+  const examplesItems = examples.map(({ title, exSolution, output }, index) => {
     return (
       <div key={index} className="example">
         <div className="example-title">
-          <h4>{example.title}</h4>
+          <h4>{title}</h4>
         </div>
         <pre>
-          {example.exSolution}
+          {exSolution}
           <br></br>
-          {">"} {example.output}
+          {">"} {output}
         </pre>
       </div>
     );

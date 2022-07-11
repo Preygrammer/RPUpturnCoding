@@ -1,4 +1,3 @@
-
 // dark mode
 $one: #10111d;
 $two: #00966b;
@@ -28,17 +27,21 @@ body {
 }
 
 pre {
-    background-color: #e4e3e3;
-    color: #4a4a4a;
-    font-size: .875em;
-    overflow-x: auto;
-    padding: 1.25rem 1.5rem;
-    white-space: pre;
-    word-wrap: normal;
+  background-color: #e4e3e3;
+  color: #4a4a4a;
+  font-size: 0.875em;
+  overflow-x: auto;
+  padding: 1.25rem 1.5rem;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+a:visited {
+  color: #4a4a4a;
 }
 
 a.disabled-link {
-  opacity: .5;
+  opacity: 0.5;
   box-shadow: none !important;
   pointer-events: none;
   &:hover {
@@ -47,11 +50,10 @@ a.disabled-link {
 }
 
 button[disabled] {
-  opacity: .5;
+  opacity: 0.5;
   box-shadow: none !important;
   cursor: not-allowed !important;
 }
-
 
 @keyframes spinner {
   0% {
@@ -81,7 +83,7 @@ button[disabled] {
   opacity: 0.5;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 20px;
     height: 20px;
@@ -92,5 +94,7 @@ button[disabled] {
   }
 }
 
-
-
+// display
+.d-none {
+  display: none !important;
+}

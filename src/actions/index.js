@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   GET_PROBLEMS,
   GET_PROBLEM_BY_ID,
+  GET_DISCUSSION,
   SUBMIT_CODE,
   URL,
 } from "../constants/actionTypes";
@@ -81,6 +82,18 @@ export const submitCode = (code, currentProblemId) => {
             payload: response,
           });
         }
+      });
+  };
+};
+
+export const getDiscussion = (problemId) => {
+  return (dispatch) => {
+    return axios
+      .post(`${fullUrl}/getDiscussion`, {
+        problemId,
+      })
+      .then((response) => {
+        dispatch({ type: GET_DISCUSSION, payload: response.data });
       });
   };
 };

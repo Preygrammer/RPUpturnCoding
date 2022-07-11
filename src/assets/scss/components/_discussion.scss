@@ -1,0 +1,103 @@
+.App.dark-mode {
+  .discussion {
+    color: #4a4a4a;
+
+    &-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &-btn {
+        -webkit-appearance: none;
+        height: 30px;
+        color: #fff;
+        border-radius: 3px;
+        padding: 0 10px;
+        border: 1px solid #00966b;
+        background-color: #00966b;
+      }
+    }
+
+    .user-reply {
+      margin: 10px 0;
+      &-btn {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: #00966b;
+
+        svg {
+          margin-right: 5px;
+          font-size: 12px;
+        }
+      }
+    }
+
+    .user-comment {
+      position: relative;
+      display: flex;
+      padding-bottom: 10px;
+      &.child {
+        margin-left: 60px;
+      }
+
+      &-img {
+        &-round {
+          position: relative;
+          border-radius: 50%;
+          object-fit: cover;
+          height: 50px;
+          width: 50px;
+          z-index: 2;
+        }
+      }
+
+      //   &-thread-line {
+      //     position: absolute;
+      //     height: 100%;
+      //     top: 0;
+      //     left: 30px;
+      //     border-left: 1px solid #d5d5d5;
+      //   }
+
+      &-details {
+        margin-left: 15px;
+
+        p {
+          font-size: 14px;
+          margin-top: 8px;
+        }
+
+        &-name {
+          font-size: 15px;
+          font-weight: bold;
+
+          small i {
+            font-weight: normal;
+          }
+        }
+      }
+
+      &-actions {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        align-items: center;
+
+        li {
+          margin-right: 8px;
+          a {
+            color: #00966b;
+          }
+        }
+      }
+    }
+
+    .user-comment.child .user-comment-img-round {
+      height: 40px;
+      width: 40px;
+    }
+  }
+}

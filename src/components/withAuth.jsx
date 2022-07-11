@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { checkCurrentUserAuth } from "../actions/index";
-import { NOT_AUTHENTICATED, AUTH_CHECK_USER } from "../constants/actionTypes";
+import { AUTH_CHECK_USER } from "../constants/actionTypes";
 import Login from "./Login";
 
 // I use class based component for this because

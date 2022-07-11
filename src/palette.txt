@@ -1,5 +1,10 @@
+Dark mode
+
 #10111D
 #00966B
 #00CE43
 #9BD093
 #FD0122
+
+- border
+#d5d5d5

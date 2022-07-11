@@ -19,12 +19,8 @@ import {
 } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
-function ProblemPage({ problem }) {
+function ProblemPage() {
   const dispatch = useDispatch();
-  const location = useLocation();
-
-  console.log(location);
-
   // optional configuration
   const options = {
     // you can also just use 'bottom center'
@@ -62,14 +58,11 @@ function ProblemPage({ problem }) {
         <SplitPane className="split-pane-container">
           <div className="problems-split-left">
             <Tab />
-            <ProblemDetails />
+            {/* Render Child Routes */}
             <Outlet />
           </div>
           <div className="problems-split-right">
-            <ProblemCodeMirror
-            // codeValue={js_beautify(((problem && problem) || {})["code"])}
-            // currentProblemId={((problem && problem) || {})["id"]}
-            />
+            <ProblemCodeMirror />
           </div>
         </SplitPane>
       </div>
